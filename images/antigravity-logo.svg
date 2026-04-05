@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180" fill="none">
+  <defs>
+    <linearGradient id="ag-grad" x1="40" y1="170" x2="160" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4FA3F7"/>
+      <stop offset="40%" stop-color="#4FC3A0"/>
+      <stop offset="70%" stop-color="#E8A030"/>
+      <stop offset="100%" stop-color="#E05040"/>
+    </linearGradient>
+  </defs>
+  <!-- Letter A shape matching the AntiGravity logo -->
+  <path d="M100 8 C85 8, 72 22, 55 55 L10 155 C6 163, 10 170, 20 170 L38 170 C44 170, 49 166, 52 160 L65 132 C72 115, 85 108, 100 108 C115 108, 128 115, 135 132 L148 160 C151 166, 156 170, 162 170 L180 170 C190 170, 194 163, 190 155 L145 55 C128 22, 115 8, 100 8 Z M100 40 C106 40, 112 46, 118 58 L130 88 C120 82, 110 78, 100 78 C90 78, 80 82, 70 88 L82 58 C88 46, 94 40, 100 40 Z" fill="url(#ag-grad)"/>
+</svg>
