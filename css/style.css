@@ -72,6 +72,10 @@ img {
   color: var(--accent);
 }
 
+.claude-accent {
+  color: #D97757;
+}
+
 
 /* ---- BUTTONS ---- */
 .btn-primary {
@@ -273,7 +277,8 @@ img {
 .hero-visual-placeholder {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
+  flex: 0 0 450px;
   height: auto;
   aspect-ratio: 1;
   z-index: 1;
@@ -283,23 +288,49 @@ img {
   justify-content: center;
 }
 
+.hero-visual-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle at 35% 35%, rgba(217, 119, 87, 0.75) 0%, transparent 60%),
+              radial-gradient(circle at 65% 65%, rgba(79, 107, 255, 0.75) 0%, transparent 60%);
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+  animation: pulse-glow 6s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
 .hero-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transform: scale(1.6) translateX(-10px);
   filter: drop-shadow(0 0 40px rgba(79, 107, 255, 0.35));
   animation: float-img 5s ease-in-out infinite;
 }
 
 @keyframes float-img {
-
   0%,
   100% {
-    transform: translateY(0px);
+    transform: scale(1.6) translateX(-10px) translateY(0px);
   }
-
   50% {
-    transform: translateY(-14px);
+    transform: scale(1.6) translateX(-10px) translateY(-14px);
   }
 }
 
@@ -761,53 +792,231 @@ img {
   pointer-events: none;
 }
 
-.price-card {
+/* ---- OFFER STACK ---- */
+.offer-stack-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  background: rgba(18, 18, 22, 0.4);
+  border: 1px solid rgba(79, 107, 255, 0.3); /* Borda com leve tom do neon azul */
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(79, 107, 255, 0.15), 0 20px 60px rgba(0,0,0,0.6); /* Brilho neon azul espalhado */
   position: relative;
   z-index: 2;
-  max-width: 500px;
-  margin: 0 auto;
-  background: var(--bg-card);
-  border: 1px solid rgba(79, 107, 255, 0.3);
-  border-radius: 28px;
-  padding: 56px 48px;
-  text-align: center;
-  box-shadow: 0 0 60px rgba(79, 107, 255, 0.12);
+  text-align: left;
 }
 
-.price-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 20px;
+/* Coluna 1: Itens */
+.offer-stack-items {
+  padding: 48px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.price-value {
+.offer-stack-title {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-.price-big {
-  font-size: 5rem;
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 1;
+.offer-stack-subtitle {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stack-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 24px;
+}
+
+.stack-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.stack-item-info {
+  flex: 1;
+}
+
+.stack-item-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.price-obs {
-  color: var(--text-dim);
+.stack-item-desc {
   font-size: 0.85rem;
-  margin-bottom: 36px;
+  color: var(--text-dim);
+  line-height: 1.5;
 }
 
-.price-guarantee {
-  margin-top: 16px;
+.stack-item-price {
+  color: #a8a8b3;
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.badge-bonus {
+  background: rgba(217, 119, 87, 0.15); /* Laranja Claude */
+  color: #d97757;
+  font-size: 0.65rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid rgba(217, 119, 87, 0.3);
+}
+
+.badge-incluso {
+  color: #d97757;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none !important;
+  opacity: 1;
+}
+
+.stack-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.stack-total-price {
+  font-family: monospace;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #a8a8b3;
+  text-decoration: line-through;
+}
+
+/* Coluna 2: Checkout */
+.offer-checkout {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(180deg, rgba(79, 107, 255, 0.06) 0%, rgba(79, 107, 255, 0.0) 100%);
+}
+
+.offer-checkout::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  box-shadow: inset 0 0 40px rgba(79, 107, 255, 0.1);
+  pointer-events: none;
+}
+
+.checkout-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 32px;
+  align-self: flex-start;
+  box-shadow: 0 0 20px rgba(79, 107, 255, 0.4);
+}
+
+.checkout-label {
   font-size: 0.8rem;
+  color: #d1d1d6;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.checkout-price-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.checkout-price-prefix {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #d1d1d6;
+  margin-right: 8px;
+}
+
+.checkout-price-currency {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #d97757;
+  margin-right: 6px;
+}
+
+.checkout-price {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.checkout-cash {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #d1d1d6;
+  margin-bottom: 40px;
+}
+
+.checkout-btn {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 18px 24px;
+  font-size: 1.1rem;
+}
+
+.checkout-security {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+
+.checkout-icons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  opacity: 0.4;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }
 
 /* ---- GARANTIA ---- */
@@ -1018,12 +1227,19 @@ footer {
     text-align: center;
   }
 
-  .price-card {
-    padding: 40px 28px;
+  .offer-stack-container {
+    grid-template-columns: 1fr;
   }
-
-  .price-big {
-    font-size: 4rem;
+  .offer-stack-items {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 32px 24px;
+  }
+  .offer-checkout {
+    padding: 32px 24px;
+  }
+  .checkout-price {
+    font-size: 2.8rem;
   }
 
   .learn-grid {
